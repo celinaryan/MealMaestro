@@ -1,0 +1,72 @@
+.recipe-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px; /* Adjust this value to center it vertically as you prefer */
+  }
+  
+  .recipe-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 300px; /* Adjust width as necessary */
+  }
+  
+  .form-row {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* This centers the button horizontally */
+  }
+  
+  .form-row label {
+    margin-bottom: 5px;
+
+
+  }
+  .form-row h2{
+    text-decoration: underline;
+    padding-bottom: 10px;
+  }
+  .checkbox-group label {
+    display: block;
+  }
+  /* Add margin to the checkbox input */
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px; /* Adjust the value as needed */
+  }
+  
+  /* Or you could add padding to the label instead */
+  .checkbox-group label {
+    padding-right: 10px; /* Adjust the value as needed */
+    display: flex;
+    align-items: center;
+  }
+  
+  /* To ensure labels and checkboxes are aligned nicely */
+  .checkbox-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; /* Add space between each checkbox */
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center; /* This centers the button horizontally */
+    margin-top: 15px; /* Space above the button, adjust as needed */
+    margin-bottom: 15px;
+}
+
+  .submit-button {
+    background-color: #4CAF50; /* Your desired color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: fit-content; /* This will ensure the button doesn't stretch to fill the container */
+  }
+  

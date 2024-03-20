@@ -31,3 +31,10 @@ body {
     text-wrap: balance;
   }
 }
+
+h1{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: larger;
+  text-align: center;
+}
