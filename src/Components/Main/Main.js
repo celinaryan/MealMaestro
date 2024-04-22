@@ -8,7 +8,12 @@ const MainModule = () => {
         <div style={{ textAlign: "center", width: "80%" }}> {/* Centered container with text alignment */}
             <img src={logo} className="logo" alt="Logo" />
             <h1 className="login_button">Welcome! Talk to an AI</h1>
-            <div>Upload a photo here</div>
+            
+            {/* Button for uploading ingredients */}
+            <button>
+                Upload Ingredients
+            </button>
+
             <form>
                 <label htmlFor="textbox">Type anything:</label><br />
                 <textarea id="textbox" name="textbox" rows="10" cols="50" placeholder="Type anything..."></textarea>
@@ -25,6 +30,21 @@ const MainModule = () => {
 
                 .login_button {
                     margin-bottom: 20px; /* Space below the header */
+                }
+
+                button {
+                    display: block; /* Center the button */
+                    margin: 20px auto; /* Vertical space and centering */
+                    padding: 10px 20px; /* Button padding for better touch */
+                    background-color: #4CAF50; /* A nice shade of green */
+                    color: white; /* Text color */
+                    border: none; /* Remove default border */
+                    border-radius: 5px; /* Rounded corners */
+                    cursor: pointer; /* Pointer cursor on hover */
+                }
+
+                button:hover {
+                    background-color: #45a049; /* Darker shade on hover */
                 }
                 `}
             </style>
