@@ -77,7 +77,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 {
                     role: "user",
                     content: [
-                        { type: "text", text: `With these following ingredients, list possible recipes I can make. Include step by step directions, cooking time, cooking materials needed, serving portions, and ingredients needed: ${ingredients}. Make sure to take into account the following preferences: ${preferences}. Output the different recipes in an array format of JSON objects. For example, "[{'recipe_name': ..., 'cooking_time': ..., 'directions': ...}, {'recipe_name: ...}]"` },
+                        { type: "text", text: `With these following ingredients, list possible recipes I can make. Include step by step directions, cooking time, cooking materials needed, serving portions, and ingredients needed: ${ingredients}. Make sure to take into account the following preferences: ${preferences}. Output the different recipes in an array format of JSON objects. For example, "[{'recipe_name': ..., 'cooking_time': ..., 'directions': ...}, {'recipe_name: ...}]". Do not use any newlines anywhere and make sure it is valid JSON.` },
                     ],
                 },
             ],
@@ -86,7 +86,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         // Should be an array of JSON objects containing recipes
         const recipes: string | null = recipeResponse.choices[0]["message"]["content"];
         console.log("recipes: ", recipes)
-        res.status(200).json({ result: ingredients });
+        res.status(200).json({ result: recipes });
     } catch (error) {
         res.status(500).json({ error: "error" });
         console.error(error);
