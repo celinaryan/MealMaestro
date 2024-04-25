@@ -8,7 +8,6 @@ import Parse from "../services/parse";
 export default function Home() {
   const router = useRouter();
 
-  // Check if the user is already authenticated
   useEffect(() => {
     if (Parse.User.current()?.authenticated) {
       router.push("/home");

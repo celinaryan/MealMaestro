@@ -5,18 +5,16 @@ import Parse from "parse";
 
 const User = () => {
     const router = useRouter();
-    const user = Parse.User.current(); // Get the current user from Parse
+    const user = Parse.User.current(); 
 
-    // Initialize userDetails state including allergies
     const [userDetails, setUserDetails] = useState({
         firstName: user?.get("firstName") || "",
         lastName: user?.get("lastName") || "",
         email: user?.get("email") || "",
-        password: user?.get("password") || "", // Be cautious with managing passwords
-        allergies: user?.get("allergies") || ""  // Initialize allergies from user data or as empty
+        password: user?.get("password") || "", 
+        allergies: user?.get("allergies") || ""  
     });
 
-    // Handle input changes for the userDetails state
     const handleChange = (event) => {
         const { name, value } = event.target;
         setUserDetails(prevState => ({
@@ -25,11 +23,9 @@ const User = () => {
         }));
     };
 
-    // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // Update user data on Parse backend
         Object.entries(userDetails).forEach(([key, value]) => {
             user.set(key, value);
         });
