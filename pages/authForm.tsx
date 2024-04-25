@@ -17,13 +17,22 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                 backgroundColor: 'rgba(255, 255, 255, 0.8)',
                 padding: '20px',
                 borderRadius: '5px',
-                backdropFilter: 'blur(10px)'
+                backdropFilter: 'blur(10px)',
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "1rem"
             }}>
                 <h2 style={{
                     color: '#006400',
                     marginBottom: '20px'
                 }}>Sign Up</h2>
-                <div className="form-group">
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "1rem"
+                }}>
                     <label htmlFor="first-name-input">First Name</label>
                     <input
                         type="text"
@@ -36,7 +45,12 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "1rem"
+                }}>
                     <label htmlFor="last-name-input">Last Name</label>
                     <input
                         type="text"
@@ -49,8 +63,13 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="email-input">Email</label>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "1rem"
+                }}>
+                    <label htmlFor="email-input" style={{ width: "73px" }}>Email</label>
                     <input
                         type="email"
                         className="form-control"
@@ -62,7 +81,12 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "1rem"
+                }}>
                     <label htmlFor="password-input">Password</label>
                     <input
                         type="password"
