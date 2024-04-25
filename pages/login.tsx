@@ -55,11 +55,22 @@ const AuthLogin = () => {
                 backgroundColor: 'rgba(255, 255, 255, 0.8)',
                 padding: '20px',
                 borderRadius: '5px',
-                backdropFilter: 'blur(10px)'
+                backdropFilter: 'blur(10px)',
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "1rem"
             }} className="card">
                 <h2 style={{ color: '#006400', marginBottom: '20px' }}>Login</h2>
-                <div className="form-group">
-                    <label htmlFor="email-input">Email</label>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "1rem"
+                }}>
+                    <label htmlFor="email-input" style={{
+                        width: "73px"
+                    }}>Email</label>
                     <input
                         type="email"
                         className="form-control"
@@ -70,7 +81,12 @@ const AuthLogin = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "1rem"
+                }}>
                     <label htmlFor="password-input">Password</label>
                     <input
                         type="password"
