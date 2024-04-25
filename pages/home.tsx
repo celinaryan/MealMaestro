@@ -1,10 +1,20 @@
 import React from "react";
 import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from 'next/router';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { checkUser } from "../services/authService";
 
 /* Home Page */
 const MainModule = () => {
+
+    const router = useRouter();
+    // Check if the user is logged in
+    useEffect(() => {
+        if (!checkUser()) {
+            router.push("/");
+        }
+    }, [router]);
+
     const [files, setFiles] = useState([]);
     const router = useRouter();
 
