@@ -22,32 +22,41 @@ const Navbar = () => {
                 nav {
                     background-color: #333;
                     padding: 5px;
-                    height: px;
+                    height: 50px; // Set a fixed height for the navbar
                 }
                 .navbar {
                     list-style-type: none;
                     padding: 0;
                     margin: 0;
                     display: flex;
+                    align-items: center; // Ensure items are vertically centered
                 }
                 .navbar-item {
                     margin-right: 20px;
+                    height: 40px;
+                    width: 60px;
+                    display: flex;
+                    align-items: center; // Vertically center the content of navbar items
                 }
                 .navbar-item:last-child {
                     margin-right: 0;
                 }
                 button {
-                    background: none;
-                    border: none;
-                    color: #fff;
-                    cursor: pointer;
-                    font-size: 16px;
-                    text-align: left;
+                    display: block; 
+                    margin: 20px auto; /* Vertical space and centering */
+                    padding: 10px 20px; /* Button padding for better touch */
+                    background-color: #333; /* A nice shade of green */
+                    color: white; /* Text color */
+                    border: none; /* Remove default border */
+                    border-radius: 5px; /* Rounded corners */
+                    cursor: pointer; /* Pointer cursor on hover */
                 }
                 button:hover {
-                    text-decoration: underline;
+                    background-color: #28a745; // Make button background green on hover
+                    color: #fff; // Keep text color white on hover
                 }
             `}</style>
+
         </nav>
     );
 };
