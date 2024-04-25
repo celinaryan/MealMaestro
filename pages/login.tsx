@@ -14,7 +14,6 @@ const AuthLogin = () => {
 
     useEffect(() => {
         if (checkUser()) {
-            alert("You are already logged in");
             router.push("/home");
         }
     }, [router]);
@@ -23,7 +22,6 @@ const AuthLogin = () => {
         if (currentUser && add) {
             loginUser(currentUser).then(userLoggedIn => {
                 if (userLoggedIn) {
-                    alert(`${userLoggedIn.get("firstName")} you successfully logged in.`);
                     router.push("/home");
                 }
                 setAdd(false);
@@ -47,7 +45,7 @@ const AuthLogin = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundImage: `url('/images/food.jpeg)`,
+            backgroundImage: `url('/images/food.jpeg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
         }}>

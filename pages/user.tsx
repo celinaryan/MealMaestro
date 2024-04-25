@@ -5,18 +5,15 @@ import Parse from "parse";
 
 const User = () => {
     const router = useRouter();
-    const user = Parse.User.current(); 
+    const user = Parse.User.current();
 
     const [userDetails, setUserDetails] = useState({
         firstName: user?.get("firstName") || "",
         lastName: user?.get("lastName") || "",
         email: user?.get("email") || "",
         password: user?.get("password") || "",
-        allergies: user?.get("allergies") || ""  
+        preferences: user?.get("preferences") || ""
     });
-    const handleLogout = async () => {
-        router.push("/");
-    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -28,8 +25,8 @@ const User = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-   
+
+
         Object.entries(userDetails).forEach(([key, value]) => {
             user.set(key, value);
         });
@@ -63,24 +60,20 @@ const User = () => {
                         <p>{userDetails.email}</p>
                     </div>
                     <div className="form-group">
-                        <label>Allergies:</label>
+                        <label>Preferences/allergies:</label>
                         <input
                             type="text"
-                            name="allergies"
-                            value={userDetails.allergies}
+                            name="preferences"
+                            value={userDetails.preferences}
                             onChange={handleChange}
-                            placeholder="Enter allergies"
+                            placeholder="Enter any preferences, allergies, etc."
                         />
                     </div>
                     <button type="submit" className="btn">Save Changes</button>
-                    
+
                 </form>
-                
+
             </div>
-            <div className="button-container">
-                <button type="button" className="btn btn-primary" onClick={handleLogout}>Logout</button>
-            </div>
-            
             <style jsx global>{`
                 html, body, #__next {
                     height: 100%;  

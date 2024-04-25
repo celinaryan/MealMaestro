@@ -7,7 +7,7 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundImage: `url("/images/food.jpeg/)`,
+            backgroundImage: `url("/images/food.jpeg/")`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
         }}>
@@ -20,8 +20,8 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                 backdropFilter: 'blur(10px)'
             }}>
                 <h2 style={{
-                    color: '#006400', 
-                    marginBottom: '20px' 
+                    color: '#006400',
+                    marginBottom: '20px'
                 }}>Sign Up</h2>
                 <div className="form-group">
                     <label htmlFor="first-name-input">First Name</label>
@@ -78,8 +78,8 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary" style={{
                         width: '100%',
-                        backgroundColor: '#006400', 
-                        color: '#FFFFFF' 
+                        backgroundColor: '#006400',
+                        color: '#FFFFFF'
                     }}>Submit</button>
                 </div>
             </form>

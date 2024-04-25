@@ -9,8 +9,6 @@ export const createUser = (newUser: any) => {
     user.set("password", newUser.password);
     user.set("email", newUser.email);
 
-    console.log("User: ", user)
-
     return user
         .signUp()
         .then((newUserSaved) => {
@@ -27,9 +25,6 @@ export const loginUser = (currUser: any) => {
     user.set("password", currUser.password);
     user.set("username", currUser.email);
 
-    console.log("User: ", user);
-    console.log();
-
     return user
         // @ts-ignore
         .logIn(user.email, user.password)
@@ -40,6 +35,10 @@ export const loginUser = (currUser: any) => {
             alert(`Error: ${error.message}`);
         });
 };
+
+export const logoutUser = (currUser: any) => {
+    Parse.User.logOut();
+}
 
 export const checkUser = () => {
     return Parse.User.current()?.authenticated;

@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+import { logoutUser } from "../services/authService";
+import Parse from "../services/parse";
 
 const Navbar = () => {
     const router = useRouter();
@@ -7,16 +9,25 @@ const Navbar = () => {
         router.push(route);
     };
 
+    const handleLogout = () => {
+        logoutUser(Parse.User);
+        router.push("/")
+    }
+
     return (
         <nav>
-            <ul className="navbar">
+            <div className="navbar2">
                 <li className="navbar-item">
                     <button onClick={() => handleNavigation("/home")}>Home</button>
                 </li>
                 <li className="navbar-item">
                     <button onClick={() => handleNavigation("/user")}>Profile</button>
                 </li>
-            </ul>
+                <li className="navbar-item-last-child">
+                    <button onClick={() => handleLogout()}>Logout</button>
+                </li>
+
+            </div>
 
             <style jsx>{`
                 nav {
@@ -31,6 +42,14 @@ const Navbar = () => {
                     display: flex;
                     align-items: center; // Ensure items are vertically centered
                 }
+
+                .navbar2 {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    width: 100%;
+                }
+
                 .navbar-item {
                     margin-right: 20px;
                     height: 40px;
@@ -38,7 +57,11 @@ const Navbar = () => {
                     display: flex;
                     align-items: center; // Vertically center the content of navbar items
                 }
-                .navbar-item:last-child {
+                .navbar-item-last-child {
+                    height: 40px;
+                    width: 60px;
+                    display: flex;
+                    align-items: center; // Vertically center the content of navbar items
                     margin-right: 0;
                 }
                 button {

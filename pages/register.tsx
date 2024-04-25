@@ -17,7 +17,6 @@ const AuthRegister = () => {
 
     useEffect(() => {
         if (checkUser()) {
-            alert("You are already logged in");
             router.push("/home");
         }
     }, [router])
@@ -26,9 +25,6 @@ const AuthRegister = () => {
         if (newUser && add) {
             createUser(newUser).then((userCreated) => {
                 if (userCreated) {
-                    alert(
-                        `${userCreated.get("firstName")}, you successfully registered`
-                    );
                     router.push("/home")
                 }
                 setAdd(false);

@@ -4,6 +4,7 @@ import formidable from 'formidable';
 import axios from "axios";
 import fs from "fs";
 import { ChatCompletionContentPart } from "openai/resources/index.mjs";
+import Parse from "parse";
 
 const openai = new OpenAI({
     apiKey: process.env["OPEN_API_KEY"],
@@ -56,7 +57,7 @@ async function uploadToPym(files: Files<string>) {
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     try {
         const form = formidable({ multiples: true })
-        const [_, files] = await form.parse(req)
+        const [fields, files] = await form.parse(req)
 
         // Turn images into links using https://pym.jchun.me
         const imageUrls: string[] | undefined = await uploadToPym(files);
@@ -87,8 +88,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         });
         const ingredients: string | null = ingredientsResponse.choices[0]["message"]["content"];
 
-        // TODO: Hardcoding preferences for now, need a user page so we can acccess this
-        const preferences: string = "Prefer Italian and Asian cuisine. Allergic to eggs. Want cook time to be an hour or below."
+        // Get user preferences
+        const user = Parse.User.current();
+        const userPreferences = user?.get("preferences") + " " + fields.preferences;
+        console.log(userPreferences);
+
         // Getting recipes from GPT with ingredients retrieved from turbo-4
         const recipeResponse = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
@@ -96,7 +100,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 {
                     role: "user",
                     content: [
-                        { type: "text", text: `With these following ingredients, list 4 possible recipes I can make. Please explicitly include detailed step by step directions, cooking time, cooking materials needed, serving portions, and ingredients needed: ${ingredients}. Make sure to take into account the following preferences: ${preferences}. Output the different recipes in an array format of JSON objects. For example, "[{'recipe_name': ..., 'cooking_time': ..., 'ingredients': ..., 'cuisine type': ..., 'tools_needed': ... 'directions': '1: .., 2: ..., "}, {'recipe_name: ...}]". Do not use any newlines anywhere and make sure it is valid JSON.` },
+                        { type: "text", text: `With these following ingredients, list 4 possible recipes I can make. Please explicitly include detailed step by step directions, cooking time, cooking materials needed, serving portions, and ingredients needed: ${ingredients}. Make sure to take into account the following preferences: ${userPreferences}. Output the different recipes in an array format of JSON objects. For example, "[{'recipe_name': ..., 'cooking_time': ..., 'ingredients': [..., ...,], 'cuisine_type': ..., 'tools_needed': ... 'directions': '1: .., 2: ..., "}, {'recipe_name: ...}]". Do not use any newlines anywhere and make sure it is valid JSON.` },
                     ],
                 },
             ],
