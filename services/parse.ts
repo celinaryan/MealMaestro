@@ -1,7 +1,7 @@
 import Parse from "parse";
 
 if (typeof window !== "undefined") {
-    Parse.initialize(process.env.NEXT_PUBLIC_APP_ID, process.env.NEXT_PUBLIC_JS_KEY);
+    Parse.initialize("aSrmbjjMiw9l6Oo7YKQ3iYUwUAOCxb5zQTsUmVOk", "2njHFirw1b0NPqJ3ORF8PIQjYoonbMB4N12yxpCF");
     Parse.serverURL = "https://parseapi.back4app.com/";
 }
 
