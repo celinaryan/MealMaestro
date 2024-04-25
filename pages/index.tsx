@@ -8,11 +8,11 @@ import Parse from "../services/parse";
 export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (Parse.User.current()?.authenticated) {
       router.push("/home");
     }
-  }, [router]);
+  }, [router]);*/
 
 
   return (
@@ -27,8 +27,8 @@ export default function Home() {
       padding: '0 10%'
     }}>
       <h1 style={{
-        color: '#FFFFFF',
-        fontSize: '64px',
+        color: '#45a049',
+        fontSize: '96px',
         maxWidth: '40%',
         textAlign: 'left'
       }}>

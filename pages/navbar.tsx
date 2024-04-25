@@ -14,7 +14,7 @@ const Navbar = () => {
                     <button onClick={() => handleNavigation("/home")}>Home</button>
                 </li>
                 <li className="navbar-item">
-                    <button onClick={() => handleNavigation("/user")}>User</button>
+                    <button onClick={() => handleNavigation("/user")}>Profile</button>
                 </li>
             </ul>
 

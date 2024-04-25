@@ -14,6 +14,9 @@ const User = () => {
         password: user?.get("password") || "",
         allergies: user?.get("allergies") || ""  
     });
+    const handleLogout = async () => {
+        router.push("/");
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -70,8 +73,14 @@ const User = () => {
                         />
                     </div>
                     <button type="submit" className="btn">Save Changes</button>
+                    
                 </form>
+                
             </div>
+            <div className="button-container">
+                <button type="button" className="btn btn-primary" onClick={handleLogout}>Logout</button>
+            </div>
+            
             <style jsx global>{`
                 html, body, #__next {
                     height: 100%;  
@@ -128,6 +137,21 @@ const User = () => {
                     background-color: #4CAF50; 
                     color: #fff;
                     cursor: pointer;
+                }
+                .button-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center; // Center the button horizontally
+                    margin-top: 20px;
+                    width: 200px;
+                }
+                .btn-primary {
+                    width: 200px; 
+                    padding: 10px 15px; // Adjust padding if needed
+                    background-color: #4CAF50; // Green background
+                    color: #fff; // White text
+                    border-radius: 3px; // Rounded corners
+                    cursor: pointer; // Pointer cursor on hover
                 }
                 .btn:hover {
                     background-color: #45a049; 
