@@ -17,7 +17,11 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                 backgroundColor: 'rgba(255, 255, 255, 0.8)',
                 padding: '20px',
                 borderRadius: '5px',
-                backdropFilter: 'blur(10px)'
+                backdropFilter: 'blur(10px)',
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: "1rem"
             }}>
                 <h2 style={{
                     color: '#006400',
@@ -25,6 +29,13 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                 }}>Sign Up</h2>
                 <div className="form-group">
                     <label htmlFor="first-name-input" style={{ display: 'block', marginBottom: '5px' }}>First Name</label>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "1rem"
+                }}>
+                    <label htmlFor="first-name-input">First Name</label>
                     <input
                         type="text"
                         className="form-control"
