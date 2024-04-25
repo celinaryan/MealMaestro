@@ -58,8 +58,8 @@ const AuthLogin = () => {
                 backdropFilter: 'blur(10px)'
             }} className="card">
                 <h2 style={{ color: '#006400', marginBottom: '20px' }}>Login</h2>
-                <div className="form-group">
-                    <label htmlFor="email-input">Email</label>
+                <div className="form-group" style={{ marginBottom: '10px' }}>
+                    <label htmlFor="email-input" style={{ display: 'block', marginBottom: '5px' }}>Email</label>
                     <input
                         type="email"
                         className="form-control"
@@ -70,8 +70,8 @@ const AuthLogin = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="password-input">Password</label>
+                <div className="form-group" style={{ marginBottom: '10px' }}>
+                    <label htmlFor="password-input" style={{ display: 'block', marginBottom: '5px' }}>Password</label>
                     <input
                         type="password"
                         className="form-control"

@@ -24,7 +24,7 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                     marginBottom: '20px'
                 }}>Sign Up</h2>
                 <div className="form-group">
-                    <label htmlFor="first-name-input">First Name</label>
+                    <label htmlFor="first-name-input" style={{ display: 'block', marginBottom: '5px' }}>First Name</label>
                     <input
                         type="text"
                         className="form-control"
@@ -37,7 +37,7 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="last-name-input">Last Name</label>
+                    <label htmlFor="last-name-input" style={{ display: 'block', marginBottom: '5px' }}>Last Name</label>
                     <input
                         type="text"
                         className="form-control"
@@ -50,7 +50,7 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email-input">Email</label>
+                    <label htmlFor="email-input" style={{ display: 'block', marginBottom: '5px' }}>Email</label>
                     <input
                         type="email"
                         className="form-control"
@@ -62,8 +62,8 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="password-input">Password</label>
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                    <label htmlFor="password-input" style={{ display: 'block', marginBottom: '5px' }}>Password</label>
                     <input
                         type="password"
                         className="form-control"
