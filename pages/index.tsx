@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import backgroundImageUrl from "../images/food.jpeg";
 import Parse from "../services/parse";
-
+import Head from 'next/head';
 
 export default function Home() {
   const router = useRouter();
@@ -17,6 +17,12 @@ export default function Home() {
 
 
   return (
+    <>
+    <Head>
+        <title>MealMaestro</title>
+        <link rel="icon" type="image/png" href="./favicon.ico"/>
+        {/* Other head elements like meta tags can be added here */}
+      </Head>
     <div style={{
       height: '100vh',
       display: 'flex',
@@ -58,6 +64,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+    </>
   );
 
 }
