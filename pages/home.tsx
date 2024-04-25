@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { checkUser } from "../services/authService";
 import Navbar from "./navbar";
-
+import { createNewRecipeRow } from "../services/recipeService";
+import Parse from "../services/parse";
 
 /* Home Page */
 const MainModule = () => {
@@ -18,17 +19,18 @@ const MainModule = () => {
     }, [router]);
 
     const [files, setFiles] = useState([]);
+
     const handleFileChange = (e: any) => {
         setFiles(e.target.files);
     };
-
     const handleLogout = async () => {
         router.push("/");
     };
-
+    const [selectedCuisines, setSelectedCuisines] = useState([]);
+    const [selectedLevels, setSelectedLevels] = useState([]);
+  
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-
         const formData = new FormData();
         Array.from(files).forEach((file, index) => {
             formData.append('photos', file);
@@ -52,16 +54,47 @@ const MainModule = () => {
         
 
         // Handle the response from your API route
-        const data = await response.json();
+        
         if (response.ok) {
+            // alert('Recipes fetched successfully!');
+            // const data = await response.json();
+            const data = await response.json();
             alert('Recipes fetched successfully!');
-            console.log(data)
+            console.log("data:", data);
+            console.log("type of recipes", typeof(data));
+            console.log("data.result:", data.result);
+            console.log("type of recipes", typeof(data.result));
+
+            // const currentUser = checkUser(); // This should return a Parse.User object
+            const currentUser = Parse.User.current();
+            console.log("current user: ", currentUser);
+            if (currentUser) {
+                // data.result is a string, so parse it if needed
+                const recipesArray = typeof data.result === 'string' ? JSON.parse(data.result) : data.result;
+                console.log("recipesArray", recipesArray);
+                console.log("type of recipesArray", typeof(recipesArray));
+                // Now save each recipe in the array
+                
+                try {
+                    await createNewRecipeRow(currentUser, recipesArray);
+                } catch (error) {
+                    console.error('Failed to save recipe:', error);
+                    alert('Failed to save a recipe to the database.');
+                    // Optionally break out of the loop if one save fails
+                    
+                }
+                
+    // After all recipes have been attempted to save, navigate to the /recipes page
+    router.push('/recipes');
+} else {
+    alert('No user logged in.');
+}
             // Process and display the recipes data
         } else {
-            alert(`Failed to fetch recipes: ${data.error}`);
+            // alert(`Failed to fetch recipes: ${data.error}`);
             console.log(data)
+            alert(`Failed to fetch recipes: ${data}`);
         }
-
     };
 
     return (
@@ -118,6 +151,7 @@ const MainModule = () => {
                         </div>
                     </form>
                 </div>
+
 
             </div>
         </div>
