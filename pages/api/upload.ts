@@ -3,6 +3,8 @@ import OpenAI from "openai";
 import formidable from 'formidable';
 import axios from "axios";
 import fs from "fs";
+import { ChatCompletionContentPart } from "openai/resources/index.mjs";
+import Parse from "parse";
 
 const openai = new OpenAI({
     apiKey: process.env["OPEN_API_KEY"],
@@ -18,6 +20,19 @@ export const config = {
         bodyParser: false
     }
 }
+
+type imageUrl = {
+    url: string
+};
+type textDesc = {
+    type: string,
+    text: string
+};
+type imageDesc = {
+    type: string,
+    image_url: imageUrl
+};
+type contentType = imageDesc | textDesc;
 
 // Function to read files from machine and send to Pym
 async function uploadToPym(files: Files<string>) {
@@ -38,28 +53,62 @@ async function uploadToPym(files: Files<string>) {
     return imageUrls
 }
 
+// TODO: Handle multiple images
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     try {
         const form = formidable({ multiples: true })
         const [fields, files] = await form.parse(req)
+
+        // Turn images into links using https://pym.jchun.me
         const imageUrls: string[] | undefined = await uploadToPym(files);
-        console.log("image urls: ", imageUrls);
-        const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo-0125",
-            max_tokens: 4096,
+        if (!imageUrls) {
+            res.status(500).json({ error: "Picture conversion failed." });
+        }
+
+        // Support multiple image inputs
+        let contents: contentType[] = [];
+        contents.push({ type: "text", text: "Please list the ingredients in these pictures separated by commas and with no descriptions." });
+        for (const url of imageUrls) {
+            contents.push({
+                type: "image_url",
+                image_url: { "url": `https://pym.jchun.me/api/${url}` }
+            })
+        }
+        console.log(contents)
+
+        // Get the ingredients from GPT by sending picture links
+        const ingredientsResponse = await openai.chat.completions.create({
+            model: "gpt-4-turbo",
+            messages: [
+                {
+                    role: "user",
+                    content: contents as ChatCompletionContentPart[],
+                },
+            ],
+        });
+        const ingredients: string | null = ingredientsResponse.choices[0]["message"]["content"];
+
+        // Get user preferences
+        const user = Parse.User.current();
+        const userPreferences = user?.get("preferences") + " " + fields.preferences;
+        console.log(userPreferences);
+
+        // Getting recipes from GPT with ingredients retrieved from turbo-4
+        const recipeResponse = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
             messages: [
                 {
                     role: "user",
                     content: [
-                        { type: "text", text: "What’s food ingredients are in this image?" },
+                        { type: "text", text: `With these following ingredients, list 4 possible recipes I can make. Please explicitly include detailed step by step directions, cooking time, cooking materials needed, serving portions, and ingredients needed: ${ingredients}. Make sure to take into account the following preferences: ${userPreferences}. Output the different recipes in an array format of JSON objects. For example, "[{'recipe_name': ..., 'cooking_time': ..., 'ingredients': [..., ...,], 'cuisine_type': ..., 'tools_needed': ... 'directions': '1: .., 2: ..., "}, {'recipe_name: ...}]". Do not use any newlines anywhere and make sure it is valid JSON.` },
                     ],
                 },
             ],
         });
 
-        const responseText: string = JSON.stringify(response.choices);
-        console.log("openAI response: ", responseText)
-        res.status(200).json({ result: responseText });
+        // Should be an array of JSON objects containing recipes
+        const recipes: string | null = recipeResponse.choices[0]["message"]["content"];
+        res.status(200).json({ result: recipes });
     } catch (error) {
         res.status(500).json({ error: "error" });
         console.error(error);
