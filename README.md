@@ -1,10 +1,9 @@
 # MealMaestro
 
-TODO:
-- Fix CSS of the pages
-- User profile page -> hooking preferences up to the backend when asking for recipes
-- Making recipe cards
-- NavBar + search?
-- Maybe use SSR to render recipes? Takes a loooong time for it to send to frontend as a response
-- After user clicks Get Recipe, should add a spinning loading logo as it takes a while and can be confusing to user.
-- Handle multiple files
+## How to run
+- Clone repository
+- Run `npm install` to install dependencies (all listed in package.json)
+- Run `npm run dev` in your command line
+- Link to localhost website should show up in command line
+- Create a back4app account & project and generate project keys.
+- Create a `.env.local` folder, and input your `OPENAI_API_KEY` from OpenAI, and your `NEXT_PUBLIC_APP_ID` and `NEXT_PUBLIC_JS_KEY` from back4app.

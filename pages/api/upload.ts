@@ -90,8 +90,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
         // Get user preferences
         const user = Parse.User.current();
-        const userPreferences = user?.get("preferences") + " " + fields.preferences;
-        console.log(userPreferences);
+        const userProfilePreferences = user?.get("preferences");
+        const userPreferences = (userProfilePreferences || "") + " " + (fields.preferences || "");
 
         // Getting recipes from GPT with ingredients retrieved from turbo-4
         const recipeResponse = await openai.chat.completions.create({
